@@ -28,7 +28,7 @@ function Navbar({ title }) {
 }
 
 Navbar.defaultProps = {
-  title: 'Github Finder',
+  title: process.env.REACT_APP_WEBSITE_NAME,
 };
 
 Navbar.propTypes = {
