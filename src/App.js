@@ -6,6 +6,7 @@ import Navbar from './components/layout/Navbar';
 import About from './pages/About';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
+import User from './pages/User';
 import Alert from './components/layout/Alert';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/notfound' element={<NotFound />} />
+                <Route path='/user/:login' element={<User />} />
                 <Route path='/*' element={<NotFound />} />
               </Routes>
             </main>
