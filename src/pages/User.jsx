@@ -4,16 +4,37 @@ import { useParams, Link } from 'react-router-dom';
 import Spinner from '../components/layout/Spinner';
 import GitHubContext from '../context/github/GitHubContext';
 import RepoList from '../components/repos/RepoList';
+import { getUser, getUserRepos } from '../context/github/GitHubActions';
 
 function User() {
-  const { getUser, user, loading, getRepos, repos } = useContext(GitHubContext);
+  const { user, loading, repos, dispatch } = useContext(GitHubContext);
 
   const params = useParams();
 
   useEffect(() => {
-    getUser(params.login);
-    getRepos(params.login);
-  }, []);
+    // My way:
+    // (async () => {
+    //   dispatch({ type: 'SET_LOADING' });
+    //   const user = await getUser(params.login);
+    //   dispatch({ type: 'GET_USER', payload: user });
+    // })();
+    // (async () => {
+    //   dispatch({ type: 'SET_LOADING' });
+    //   const repos = await getUserRepos(params.login);
+    //   dispatch({ type: 'GET_REPOS', payload: repos });
+    // })();
+
+    //His way:
+    const getUserData = async () => {
+      dispatch({ type: 'SET_LOADING' });
+      const user = await getUser(params.login);
+      dispatch({ type: 'GET_USER', payload: user });
+
+      const repos = await getUserRepos(params.login);
+      dispatch({ type: 'GET_REPOS', payload: repos });
+    };
+    getUserData();
+  }, [dispatch, params]);
 
   const {
     name,
