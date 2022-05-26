@@ -56,10 +56,6 @@ export const GitHubProvider = ({ children }) => {
     dispatch({ type: 'GET_REPOS', payload: data });
   };
 
-  const clearUsers = () => {
-    dispatch({ type: 'CLEAR_USERS' });
-  };
-
   const setLoading = () => {
     dispatch({ type: 'SET_LOADING' });
   };
@@ -69,7 +65,6 @@ export const GitHubProvider = ({ children }) => {
       value={{
         ...state,
         dispatch,
-        clearUsers,
         getUser,
         getRepos,
       }}
